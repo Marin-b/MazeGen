@@ -2,7 +2,7 @@ const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 const HEIGHT = 1000;
 const WIDTH = 1600;
-const C_SIZE = 20;
+const C_SIZE = 10;
 
 canvas.height = HEIGHT
 canvas.width = WIDTH
@@ -140,6 +140,7 @@ class Maze {
   }
 }
 
+//NEED REFACTO!!
 class MazeSolver{
   constructor(maze, start, end){
     this.maze = maze;
@@ -263,27 +264,26 @@ class MazeSolver{
     }
 
   }
+
   moreEfficientSolve(x = this.start[0], y = this.start[1]){
-    if(x == this.end[0] && y == this.end[1])
+    while(!(x == this.end[0] && y == this.end[1]))
     {
       this.path.push([x, y])
-      this.path.push([x + 1, y])
-      return;
+          let dirs = this.getCellPossibilities(x, y, this.cameFrom);
+      dirs = dirs.filter(el => el != this.cameFrom)
+      if (dirs.length > 1){
+        [x, y] = this.useIntersectionDirection(this.createIntersection(x, y, this.cameFrom));
+      }
+      if (dirs.length == 0){
+        [x, y] = this.moveToLastIntersection()
+      }
+      if (dirs.length == 1){
+        [x ,y] = this.moveTo(x, y, dirs[0])
+        this.cameFrom = this.oppositeDirection(dirs[0]);
+      }
     }
     this.path.push([x, y])
-    let dirs = this.getCellPossibilities(x, y, this.cameFrom);
-    dirs = dirs.filter(el => el != this.cameFrom)
-    if (dirs.length > 1){
-      [x, y] = this.useIntersectionDirection(this.createIntersection(x, y, this.cameFrom));
-    }
-    if (dirs.length == 0){
-      [x, y] = this.moveToLastIntersection()
-    }
-    if (dirs.length == 1){
-      [x ,y] = this.moveTo(x, y, dirs[0])
-      this.cameFrom = this.oppositeDirection(dirs[0]);
-    }
-    return this.moreEfficientSolve(x, y)
+    this.path.push([x + 1, y])
   }
 
   drawPath(ctx){
