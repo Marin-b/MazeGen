@@ -76,6 +76,7 @@ class Maze {
   }
 
   generateMaze = () => {
+    console.log('generating')
     let x = startPos[0];
     let y = startPos[1];
     this.cells[y][x].left = true;
@@ -96,6 +97,7 @@ class Maze {
   }
 
   draw = (ctx) => {
+    console.log('drawing')
     ctx.beginPath();
     ctx.strokeStyle = "black";
     ctx.lineWidth = C_SIZE / 100

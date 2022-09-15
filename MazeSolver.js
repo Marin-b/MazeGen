@@ -8,24 +8,20 @@ class MazeSolver
     this.end = this.getCellAt(end)
     this.ctx = context
     this.path = [this.getCellAt([start[0], start[1]])]
-    this.canceled = false
   }
 
-  generateStep()
+  nextStep()
   {
-    if (this.canceled) {
-      return
-    }
+    this.solving = true
     const next = this.findNext();
     if (next){
       this.goTo(next);
       if (next == this.end) {
-        return
+        this.solving = false
       }
     } else {
       this.backtrack()
     }
-     window.requestAnimationFrame(() => this.generateStep())
   }
 
   goTo(next)

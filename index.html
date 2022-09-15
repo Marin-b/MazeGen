@@ -3,10 +3,15 @@
       <title>MazeGen</title>
     </head>
     <body style="margin: 0; display: flex; justify-content: center; width: 100vw; height: 100vh" >
-      <div id="controls" style="width: 50px; padding-top: 20; padding-left: 10px; display: flex; flex-direction: column; justify-content: center; gap: 40px;">
-        <input type="int" id="cellSize" style ="width: 40px; text-align:center">
+      <div id="controls" style="width: 80px; padding-top: 20; padding-left: 10px; display: flex; flex-direction: column; justify-content: center; gap: 40px; align-items: center;">
+        <div style="height: 40px; text-align: center;">
+          <label for="cellSize">Cell size</label>
+          <input type="int" id="cellSize" style ="width: 40px; text-align:center">
+          <div id="gridSize"></div>
+
+        </div>
         <img id="reload" width="40px" src="https://pics.freeicons.io/uploads/icons/png/14064611011574330935-512.png" alt="">
-        <img id="solve" width="40px" src="https://pics.freeicons.io/uploads/icons/png/16741343401556273568-512.png" alt="">
+        <img id="start" width="40px" src="https://pics.freeicons.io/uploads/icons/png/16741343401556273568-512.png" alt="">
       </div>
       <div id="mazeContainer" style="flex-grow: 1; height: 100%;">
         <canvas>
